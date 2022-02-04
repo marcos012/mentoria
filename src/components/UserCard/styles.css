@@ -1,0 +1,22 @@
+.user-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #f4f4f4;
+  width: 100px;
+  height: 125px;
+  text-align: center;
+  margin: 10px 40px 0 0;
+}
+
+.user-image {
+  max-width: 60%;
+  margin: 20px 0;
+}
+
+.username {
+  color: #333;
+  font: 400 14px Roboto, sans-serif;
+  text-transform: capitalize;
+}

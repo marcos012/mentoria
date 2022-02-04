@@ -1,0 +1,14 @@
+.infos-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 35px;
+  line-height: 25px;
+}
+
+.repo-name {
+  color: #000;
+}
+
+span {
+  color: #4e4e4e;
+}
