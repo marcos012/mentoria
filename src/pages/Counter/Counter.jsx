@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 export default function Counter() {
     const [contador, setContador] = useState(0);
     const [mensagem, setMensagem] = useState('');
+    const [users, setUsers] = useState([]);
 
 
     useEffect(() => {
         setMensagem(`Contador alterado para ${contador}`)
+        getUsers()
     }, [contador])
 
 
@@ -18,7 +20,15 @@ export default function Counter() {
     function decrement() {
         setContador(contador - 1)
     }
-    
+
+    async function getUsers() {
+        const response = await fetch('https://api.github.com/users');
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+        setUsers(data)
+    }
+
     return (
         <div>
             <nav>
@@ -31,6 +41,10 @@ export default function Counter() {
             <button onClick={increment}>+</button>
             <span>{ contador }</span>
             <button onClick={decrement}>-</button>
+
+            <ul>
+                {users.map(user => <li>{user.login}</li>)}
+            </ul>
         </div>
     )
 }
