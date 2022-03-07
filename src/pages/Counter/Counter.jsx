@@ -1,50 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment } from '../../store/docks/Counter/action';
 
 export default function Counter() {
-    const [contador, setContador] = useState(0);
-    const [mensagem, setMensagem] = useState('');
-    const [users, setUsers] = useState([]);
+    const { count } = useSelector(state => state.counter);
+    const dispatch = useDispatch();
 
 
-    useEffect(() => {
-        setMensagem(`Contador alterado para ${contador}`)
-        getUsers()
-    }, [contador])
-
-
-    function increment() {
-        setContador(contador + 1)
+    function incrementCounter() {
+        dispatch(increment())
     }
 
-    function decrement() {
-        setContador(contador - 1)
-    }
+    function decrementCounter() {
+        dispatch(decrement())
 
-    async function getUsers() {
-        const response = await fetch('https://api.github.com/users');
-        console.log(response);
-        const data = await response.json();
-        console.log(data);
-        setUsers(data)
     }
 
     return (
         <div>
-            <nav>
-                <Link to="/">Counter</Link> |{" "}
-                <Link to="users">Users</Link>
-            </nav>
-            
-
-            <h1>{ mensagem }</h1>
-            <button onClick={increment}>+</button>
-            <span>{ contador }</span>
-            <button onClick={decrement}>-</button>
-
-            <ul>
-                {users.map(user => <li>{user.login}</li>)}
-            </ul>
+            <button onClick={incrementCounter}>+</button>
+            <span>{ count }</span>
+            <button onClick={decrementCounter}>-</button>
         </div>
     )
 }
